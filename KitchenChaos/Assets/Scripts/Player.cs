@@ -29,9 +29,13 @@ public class Player : MonoBehaviour
         // Normalize the vector
         inputVector = inputVector.normalized;
 
+        // Move the player
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
         transform.position += moveDir * moveSpeed * Time.deltaTime;
 
-        Debug.Log(Time.deltaTime);
+        // Rotate the player to face the direction of movement
+        float rotateSpeed = 10f;
+        // Slerp is a smooth rotation in terms of spherical interpolation
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
 }
